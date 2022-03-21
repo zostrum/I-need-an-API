@@ -1,0 +1,12 @@
+{
+  "app_name": "I Need An Api",
+  "ports": {
+    "host": 3004,
+    "guest": 3000
+  },
+  "root_dir": "../api",
+  "src_dir": "/src",
+  "dirs": {
+    "routes": "/routes"
+  }
+}
