@@ -7,6 +7,7 @@
   "root_dir": "../api",
   "src_dir": "/src",
   "dirs": {
-    "routes": "/routes"
+    "routes": "/routes",
+    "startup": "/startup"
   }
 }

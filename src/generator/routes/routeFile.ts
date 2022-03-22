@@ -6,11 +6,12 @@ import AbstractFileGenerator from '../../abstraction/AbstractFileGenerator';
 
 class RouteFile extends AbstractFileGenerator {
   entity: Entity;
-  path = `${config.get('root_dir')}${config.get('src_dir')}${config.get(
-    'dirs.routes'
-  )}`;
-  filecontent = '';
+  path = `${config.get('root_dir')}${config.get('src_dir')}${config.get('dirs.routes')}`;
 
+  constructor(entity: Entity) {
+    super();
+    this.entity = entity;
+  }
   generateImports = (): void => {
     this.filecontent += Templates.importsection;
   };
@@ -20,24 +21,15 @@ class RouteFile extends AbstractFileGenerator {
   };
 
   genereateRoutes = (): void => {
-    let routesSection = '';
     const routes = this.getRoutes();
-
     routes.forEach((route: Route) => {
-      routesSection += this.genereateRoute(route);
+      this.genereateRoute(route);
     });
-
-    this.filecontent += routesSection;
   };
 
   generateExports = () => {
     this.filecontent += Templates.exportSection;
   };
-
-  setRouteDefinition(entity: Entity) {
-    this.entity = entity;
-    return this;
-  }
 
   getRoutes = (): Route[] => {
     return this.entity.routes;
@@ -47,12 +39,7 @@ class RouteFile extends AbstractFileGenerator {
     return `${this.path}/${this.entity.name}.js`;
   };
 
-  workflow = [
-    this.generateImports,
-    this.genereateRoutes,
-    this.generateExports,
-    this.saveFile,
-  ];
+  workflow = [this.generateImports, this.genereateRoutes, this.generateExports, this.saveFile];
 }
 
 export default RouteFile;

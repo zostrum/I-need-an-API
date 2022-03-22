@@ -1,5 +1,5 @@
 import express from 'express';
-import { prepareDirectoryStructure } from './filesystem';
+import { prepareDirectoryStructure } from './bootstrap/filesystem';
 import Generator from './generator/generator';
 import config from 'config';
 

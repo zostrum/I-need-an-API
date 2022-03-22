@@ -1,16 +1,34 @@
 import { Route } from '../../types/route';
 
-const importsection = `const express = require("express");
+export const importsection = `const express = require("express");
 const router = express.Router();
 \n`;
 
-const endpointection = (route: Route) => {
+export const endpointection = (route: Route) => {
   return `router.${route.method}("${route.path}", async (req, resp) => {
   resp.send('${route.responce}');
 });
 \n`;
 };
 
-const exportSection = `module.exports = router;\n`;
+export const exportSection = `module.exports = router;\n`;
 
-export { importsection, endpointection, exportSection };
+export const importEntitityStartupSection = (entity: string) => {
+  return `const ${entity} = require('../routes/${entity}');\n`;
+};
+
+export const importStartupSection = (imports: string) => {
+  return `const express = require('express');\n${imports}`;
+};
+
+export const exportEntitityStartupSection = (entity: string) => {
+  return `
+  app.use('/api/${entity}', ${entity});`;
+};
+
+export const exportStartupSection = (exports: string) => {
+  return `\nmodule.exports = function(app) {
+  app.use(express.json());
+  ${exports}
+}`;
+};
